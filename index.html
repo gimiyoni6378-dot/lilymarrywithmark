@@ -452,8 +452,10 @@ body.locked{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(251,244,232,.72);
-  backdrop-filter:blur(2px);
+  padding:0;
+  border:0;
+  background:#f7efe1;
+  cursor:pointer;
   transition:opacity .55s ease, visibility .55s ease;
 }
 
@@ -463,78 +465,14 @@ body.locked{
   pointer-events:none;
 }
 
-.intro-card{
-  width:min(86vw,430px);
-  min-height:58vh;
-  padding:32px 22px;
-  border:2px solid var(--red);
-  border-radius:20px;
-  background:rgba(255,252,246,.40);
-  box-shadow:0 10px 24px rgba(0,0,0,.08), inset 0 0 0 6px rgba(255,255,255,.14);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-
-.intro-stars{
-  color:var(--red);
-  letter-spacing:.45em;
-  font-size:13px;
-  margin-bottom:16px;
-}
-
-.intro-small{
-  font-size:11px;
-  letter-spacing:.28em;
-  color:rgba(73,59,47,.72);
-  margin-bottom:16px;
-}
-
-.intro-title{
-  font-size:56px;
-  line-height:.92;
-  color:var(--red);
-  margin:0;
-  letter-spacing:.06em;
-}
-
-.intro-sub{
-  margin:18px 0 10px;
-  font-size:17px;
-  font-style:italic;
-  color:#6d594c;
-}
-
-.intro-divider{
-  margin:16px 0 18px;
-  color:var(--red);
-}
-
-.open-btn{
-  min-width:156px;
-  height:52px;
-  padding:0 22px;
-  border:1px solid #8f4d3c;
-  background:rgba(255,247,233,.86);
-  color:#7c4333;
-  letter-spacing:.24em;
-  font-weight:700;
-  box-shadow:0 4px 10px rgba(0,0,0,.08);
-  cursor:pointer;
-}
-
-.open-caption{
-  margin-top:16px;
-  font-size:11px;
-  color:rgba(73,59,47,.62);
-  letter-spacing:.14em;
-}
-
-@media(max-width:420px){
-  .intro-title{font-size:46px}
-  .intro-card{min-height:54vh}
+.intro-cover-image{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  object-position:center;
+  user-select:none;
+  -webkit-user-drag:none;
 }
 
 </style>
@@ -543,17 +481,9 @@ body.locked{
 <body class="locked">
 
 
-<div id="introScreen" class="intro-screen">
-  <div class="intro-card">
-    <div class="intro-stars">★ ★ ★</div>
-    <div class="intro-small">WEDDING INVITATION</div>
-    <h1 class="intro-title">OPEN</h1>
-    <div class="intro-sub">I'M MARRY</div>
-    <div class="intro-divider">— ♡ —</div>
-    <button id="openInvitationBtn" class="open-btn" type="button">OPEN</button>
-    <div class="open-caption">TAP TO ENTER OUR DAY</div>
-  </div>
-</div>
+<button id="introScreen" class="intro-screen" type="button" aria-label="청첩장 열기">
+  <img class="intro-cover-image" src="./cover-01.png" alt="청첩장 인트로 이미지">
+</button>
 
 <main class="page">
 
@@ -685,7 +615,6 @@ body.locked{
 <script>
 const body = document.body;
 const intro = document.getElementById("introScreen");
-const openBtn = document.getElementById("openInvitationBtn");
 const bgm = document.getElementById("bgm");
 const bgmBtn = document.getElementById("bgmBtn");
 const toast = document.getElementById("toast");
@@ -748,9 +677,7 @@ async function toggleBgm(){
   }
 }
 
-if (openBtn){
-  openBtn.addEventListener("click", openInvitation);
-}
+intro.addEventListener("click", openInvitation);
 
 if (bgmBtn){
   bgmBtn.addEventListener("click", toggleBgm);
