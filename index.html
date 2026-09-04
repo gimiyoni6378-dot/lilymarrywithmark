@@ -49,6 +49,7 @@ button{font:inherit}
   background-size:7px 7px,9px 9px,100% 8px,100% 11px;
 }
 
+/* 종이결이 확실히 보이도록 섹션 배경을 막지 않음 */
 .section{
   position:relative;
   padding:36px 22px;
@@ -90,32 +91,15 @@ button{font:inherit}
   margin:16px 0;
 }
 
-.hero-photo{
-  width:100%;
-  height:auto;
-  background:transparent;
-  border:0;
-  box-shadow:none;
-  overflow:hidden;
-  transform:none;
-  position:relative;
-  padding-top:140px;
-  padding-bottom:10px;
-}
-.hero-photo img{
-  width:min(84%,430px);
-  height:auto;
-  display:block;
-  margin:0 auto;
-  object-fit:contain;
-  object-position:center top;
-}
+.hero-photo{width:100%;height:auto;background:transparent;border:0;box-shadow:none;overflow:hidden;transform:none;position:relative;padding-top:180px;padding-bottom:10px}
+.hero-photo img{width:min(84%,430px);height:auto;display:block;margin:0 auto;object-fit:contain;object-position:center top}
+
 .hero-text-space{
   position:absolute;
   top:0;
   left:0;
   right:0;
-  height:140px;
+  height:180px;
   pointer-events:none;
 }
 
@@ -621,9 +605,11 @@ function showToast(message){
 }
 
 async function openInvitation(){
+  // 먼저 청첩장을 확실하게 열고, 음악 재생은 별도로 시도
   body.classList.remove("locked");
   intro.classList.add("hidden");
 
+  // 전환 후 커버가 터치를 가로채지 않도록 DOM에서 완전히 숨김
   window.setTimeout(() => {
     intro.style.display = "none";
   }, 650);
@@ -638,6 +624,7 @@ async function openInvitation(){
     bgmBtn.textContent = "Ⅱ";
     bgmBtn.classList.add("playing");
   }catch(error){
+    // 테스트 파일에 BGM이 없어도 화면 전환은 정상 동작
     playing = false;
     bgmBtn.textContent = "♪";
     bgmBtn.classList.remove("playing");
