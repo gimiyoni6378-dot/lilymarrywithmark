@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#FAF4EE">
 <title>Vintage Wedding Invitation</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@500;700;800&display=swap');
 :root{
   --cream:#fbf4e8;
   --ink:#493b2f;
@@ -101,6 +102,61 @@ button{font:inherit}
   right:0;
   height:180px;
   pointer-events:none;
+}
+
+.hero-title-wrap{
+  position:absolute;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(92%,480px);
+  height:160px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  z-index:3;
+  pointer-events:none;
+}
+
+.hero-kicker{
+  font-family:"Inter",Arial,sans-serif;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#96504b;
+  margin:0 0 8px;
+  opacity:0;
+  animation:fadeUp .9s ease forwards;
+}
+
+.hero-main-title{
+  font-family:"Calistoga","Cooper Black","Bookman Old Style",serif;
+  font-size:clamp(54px,15vw,84px);
+  line-height:.92;
+  font-weight:400;
+  color:#b45c58;
+  letter-spacing:.01em;
+  text-shadow:
+    2px 2px 0 #173f51,
+    4px 4px 0 rgba(23,63,81,.9),
+    6px 6px 10px rgba(23,63,81,.18);
+  opacity:0;
+  animation:fadeUp 1.05s ease forwards;
+  animation-delay:.22s;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .section-title{
@@ -470,6 +526,10 @@ body.locked{
   <div class="content">
     <div class="hero-photo">
       <div class="hero-text-space" aria-hidden="true"></div>
+      <div class="hero-title-wrap" aria-label="Wedding heading">
+        <div class="hero-kicker">We're getting</div>
+        <div class="hero-main-title">married</div>
+      </div>
       <img src="./main-03.png" alt="신랑 신부 메인 사진">
     </div>
   </div>
