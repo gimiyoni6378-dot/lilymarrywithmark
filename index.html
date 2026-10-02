@@ -102,10 +102,13 @@ a{color:inherit;text-decoration:none}
 .hero-meta{
   display:flex;
   justify-content:space-between;
-  gap:14px;
+  gap:8px;
   align-items:flex-end;
+  flex-wrap:nowrap;
   padding-top:15px;
 }
+.hero-note{white-space:nowrap;flex:0 0 auto}
+.hero-date{white-space:nowrap;flex:0 0 auto}
 .hero-note{
   font-family:"Caveat",cursive;
   font-size:21px;
@@ -326,8 +329,11 @@ a{color:inherit;text-decoration:none}
   font-size:40px;
   line-height:1;
   margin:0;
+  white-space:nowrap;
+  letter-spacing:-.025em;
 }
-.footer-small{
+.footer-script{font-size:31px;white-space:nowrap;letter-spacing:-.035em}
+  .footer-small{
   margin-top:9px;
   font:500 11px "Cormorant Garamond",serif;
   letter-spacing:.18em;
@@ -375,6 +381,8 @@ a{color:inherit;text-decoration:none}
   .section{padding-left:18px;padding-right:18px}
   .hero{padding:16px 12px 42px}
   .hero-title{font-size:42px}
+  .hero-note{font-size:18px}
+  .hero-date{font-size:10px;letter-spacing:.08em}
   .script-title{font-size:44px}
   .copy-block p{font-size:16px}
   .greeting-line{font-size:15px}
