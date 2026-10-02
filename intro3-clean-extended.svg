@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="2160" viewBox="0 0 1000 2160">
+  <defs>
+    <linearGradient id="watermarkPatch" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3d0007"/>
+      <stop offset=".18" stop-color="#5d0710"/>
+      <stop offset=".34" stop-color="#430006"/>
+      <stop offset=".52" stop-color="#6b0b15"/>
+      <stop offset=".7" stop-color="#4a0009"/>
+      <stop offset=".86" stop-color="#700b16"/>
+      <stop offset="1" stop-color="#360005"/>
+    </linearGradient>
+    <linearGradient id="watermarkShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e0005" stop-opacity=".18"/>
+      <stop offset=".5" stop-color="#8b1420" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#1f0003" stop-opacity=".28"/>
+    </linearGradient>
+    <clipPath id="patchClip">
+      <rect x="820" y="860" width="180" height="165" rx="2"/>
+    </clipPath>
+    <filter id="softPatch" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+    <clipPath id="bottomStrip">
+      <rect x="0" y="1021.74" width="1000" height="1138.26"/>
+    </clipPath>
+  </defs>
+
+  <!-- Opaque curtain backing removes any transparent edge gaps on mobile. -->
+  <rect width="1000" height="2160" fill="#4e0000"/>
+
+  <!-- Original artwork: scaled proportionally to viewport width, never cropped. -->
+  <image x="0" y="0" width="1000" height="1021.74"
+         preserveAspectRatio="none"
+         xlink:href="./intro3.png"/>
+
+  <!-- Bottom extension: only the bottom edge of the curtain is stretched downward. -->
+  <svg x="0" y="1021.74" width="1000" height="1138.26"
+       viewBox="0 305 322 24" preserveAspectRatio="none" clip-path="url(#bottomStrip)">
+    <image x="0" y="-305" width="322" height="329"
+           preserveAspectRatio="none"
+           xlink:href="./intro3.png"/>
+  </svg>
+
+  <!-- Paint over the '-N-' mark with a subtle curtain-like texture. -->
+  <g clip-path="url(#patchClip)" opacity=".98">
+    <rect x="820" y="860" width="180" height="165" fill="url(#watermarkPatch)"/>
+    <rect x="820" y="860" width="180" height="165" fill="url(#watermarkShade)"/>
+    <g filter="url(#softPatch)" opacity=".5">
+      <rect x="844" y="850" width="5" height="190" fill="#9d1a29"/>
+      <rect x="876" y="850" width="7" height="190" fill="#2f0005"/>
+      <rect x="915" y="850" width="4" height="190" fill="#a01b2a"/>
+      <rect x="951" y="850" width="7" height="190" fill="#2f0005"/>
+      <rect x="982" y="850" width="4" height="190" fill="#9a1928"/>
+    </g>
+  </g>
+</svg>
