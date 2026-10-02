@@ -345,6 +345,53 @@ a{color:inherit;text-decoration:none}
   transition:opacity .72s ease,transform .72s ease;
 }
 .reveal.is-visible{opacity:1;transform:translateY(0)}
+
+.intro-locked{overflow:hidden}
+.intro-overlay{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  overflow:hidden;
+  background:var(--red);
+  cursor:pointer;
+}
+.intro-curtain{
+  position:absolute;
+  top:0;
+  width:50%;
+  height:100%;
+  overflow:hidden;
+  transition:transform 1.25s cubic-bezier(.76,0,.24,1);
+  will-change:transform;
+  background:var(--red);
+}
+.intro-curtain-left{left:0;transform:translateX(0)}
+.intro-curtain-right{right:0;transform:translateX(0)}
+.intro-curtain img{
+  position:absolute;
+  top:0;
+  width:200%;
+  height:100%;
+  max-width:none;
+  display:block;
+  object-fit:cover;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.intro-curtain-left img{left:0}
+.intro-curtain-right img{right:0}
+.intro-overlay.is-open .intro-curtain-left{transform:translateX(-100%)}
+.intro-overlay.is-open .intro-curtain-right{transform:translateX(100%)}
+.intro-overlay.is-done{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .25s ease,visibility .25s ease;
+}
+@media(prefers-reduced-motion:reduce){
+  .intro-curtain{transition-duration:.35s}
+}
+
 .petal-field{position:fixed;inset:0;z-index:3;pointer-events:none;overflow:hidden}
 .petal{
   position:absolute;
@@ -396,7 +443,15 @@ a{color:inherit;text-decoration:none}
 }
 </style>
 </head>
-<body>
+<body class="intro-locked">
+<div class="intro-overlay" id="introOverlay" role="button" tabindex="0" aria-label="초대장 열기">
+  <div class="intro-curtain intro-curtain-left" aria-hidden="true">
+    <img src="./intro.png" alt="">
+  </div>
+  <div class="intro-curtain intro-curtain-right" aria-hidden="true">
+    <img src="./intro.png" alt="">
+  </div>
+</div>
 <div class="petal-field" aria-hidden="true">
   <span class="petal" style="--x:7%;--y:18%;--d:7.6s;--delay:-2.2s;--drift:12px">❀</span>
   <span class="petal" style="--x:18%;--y:39%;--d:6.3s;--delay:-4.1s;--drift:-10px">✿</span>
@@ -584,6 +639,31 @@ a{color:inherit;text-decoration:none}
 <div class="toast" id="toast"></div>
 
 <script>
+const introOverlay = document.getElementById("introOverlay");
+let introOpened = false;
+let introTimer = null;
+
+function openIntro(){
+  if(introOpened) return;
+  introOpened = true;
+  clearTimeout(introTimer);
+  introOverlay.classList.add("is-open");
+  window.setTimeout(()=>{
+    introOverlay.classList.add("is-done");
+    document.body.classList.remove("intro-locked");
+    introOverlay.remove();
+  },1450);
+}
+
+introTimer = window.setTimeout(openIntro,650);
+introOverlay.addEventListener("click",openIntro);
+introOverlay.addEventListener("keydown",(e)=>{
+  if(e.key==="Enter" || e.key===" "){
+    e.preventDefault();
+    openIntro();
+  }
+});
+
 const ADDRESS = "카페 누뗀 서울특별시 서초구 청계산로 119";
 const modal = document.getElementById("galleryModal");
 const modalImage = document.getElementById("modalImage");
