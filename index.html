@@ -68,6 +68,7 @@ a{color:inherit;text-decoration:none}
   border-top:3px solid var(--red);
   transform:rotate(-.7deg);
 }
+.hero-card.is-visible{opacity:1;transform:rotate(-.7deg)}
 .hero-card::before,.hero-card::after{
   content:"";
   position:absolute;
@@ -363,16 +364,25 @@ a{color:inherit;text-decoration:none}
   overflow:hidden;
   transition:transform 1.35s cubic-bezier(.76,0,.24,1);
   will-change:transform;
-  background-color:var(--red);
-  background-image:url("./intro.png");
-  background-repeat:no-repeat;
-  background-size:200% 100%;
-  background-position-y:center;
+  background:var(--red);
   user-select:none;
 }
-.intro-curtain-left{left:0;transform:translateX(0);background-position-x:left}
-.intro-curtain-right{right:0;transform:translateX(0);background-position-x:right}
-.intro-curtain img{display:none}
+.intro-curtain img{
+  position:absolute;
+  top:0;
+  width:100vw;
+  height:100%;
+  max-width:none;
+  display:block;
+  object-fit:cover;
+  object-position:center center;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.intro-curtain-left{left:0;transform:translateX(0)}
+.intro-curtain-left img{left:0}
+.intro-curtain-right{right:0;transform:translateX(0)}
+.intro-curtain-right img{right:0}
 .intro-overlay.is-open .intro-curtain-left{transform:translateX(-100%)}
 .intro-overlay.is-open .intro-curtain-right{transform:translateX(100%)}
 .intro-overlay.is-done{
@@ -634,12 +644,10 @@ a{color:inherit;text-decoration:none}
 <script>
 const introOverlay = document.getElementById("introOverlay");
 let introOpened = false;
-let introTimer = null;
 
 function openIntro(){
   if(introOpened) return;
   introOpened = true;
-  clearTimeout(introTimer);
   const heroCard = document.querySelector(".hero-card");
   if(heroCard) heroCard.classList.add("is-visible");
   introOverlay.classList.add("is-open");
@@ -650,7 +658,6 @@ function openIntro(){
   },1550);
 }
 
-introTimer = window.setTimeout(openIntro,650);
 introOverlay.addEventListener("click",openIntro);
 introOverlay.addEventListener("keydown",(e)=>{
   if(e.key==="Enter" || e.key===" "){
