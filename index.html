@@ -68,7 +68,6 @@ a{color:inherit;text-decoration:none}
   border-top:3px solid var(--red);
   transform:rotate(-.7deg);
 }
-.hero-card.is-visible{opacity:1;transform:rotate(-.7deg)}
 .hero-card::before,.hero-card::after{
   content:"";
   position:absolute;
@@ -347,54 +346,6 @@ a{color:inherit;text-decoration:none}
 }
 .reveal.is-visible{opacity:1;transform:translateY(0)}
 
-.intro-locked{overflow:hidden}
-.intro-overlay{
-  position:fixed;
-  inset:0;
-  z-index:200;
-  overflow:hidden;
-  background:transparent;
-  cursor:pointer;
-}
-.intro-curtain{
-  position:absolute;
-  top:0;
-  width:50%;
-  height:100%;
-  overflow:hidden;
-  transition:transform 1.35s cubic-bezier(.76,0,.24,1);
-  will-change:transform;
-  background:transparent;
-  user-select:none;
-}
-.intro-curtain img{
-  position:absolute;
-  top:0;
-  width:100vw;
-  height:100%;
-  max-width:none;
-  display:block;
-  object-fit:fill;
-  object-position:center center;
-  user-select:none;
-  -webkit-user-drag:none;
-}
-.intro-curtain-left{left:0;transform:translateX(0)}
-.intro-curtain-left img{left:0}
-.intro-curtain-right{right:0;transform:translateX(0)}
-.intro-curtain-right img{right:0}
-.intro-overlay.is-open .intro-curtain-left{transform:translateX(-100%)}
-.intro-overlay.is-open .intro-curtain-right{transform:translateX(100%)}
-.intro-overlay.is-done{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  transition:opacity .25s ease,visibility .25s ease;
-}
-@media(prefers-reduced-motion:reduce){
-  .intro-curtain{transition-duration:.35s}
-}
-
 .petal-field{position:fixed;inset:0;z-index:3;pointer-events:none;overflow:hidden}
 .petal{
   position:absolute;
@@ -446,15 +397,7 @@ a{color:inherit;text-decoration:none}
 }
 </style>
 </head>
-<body class="intro-locked">
-<div class="intro-overlay" id="introOverlay" role="button" tabindex="0" aria-label="초대장 열기">
-  <div class="intro-curtain intro-curtain-left" aria-hidden="true">
-    <img src="./intro3-final.svg" alt="">
-  </div>
-  <div class="intro-curtain intro-curtain-right" aria-hidden="true">
-    <img src="./intro3-final.svg" alt="">
-  </div>
-</div>
+<body>
 <div class="petal-field" aria-hidden="true">
   <span class="petal" style="--x:7%;--y:18%;--d:7.6s;--delay:-2.2s;--drift:12px">❀</span>
   <span class="petal" style="--x:18%;--y:39%;--d:6.3s;--delay:-4.1s;--drift:-10px">✿</span>
@@ -523,12 +466,30 @@ a{color:inherit;text-decoration:none}
       <h2 class="script-title">Moments together</h2>
       <div class="subtle-divider"></div>
       <div class="gallery-grid">
-        <button class="gallery-item" data-src="./assets/photo2.jpg" data-alt="Wedding photo 02"><span class="gallery-frame"><span class="photo-placeholder">PHOTO 02</span></span><span class="gallery-caption">02</span></button>
-        <button class="gallery-item" data-src="./assets/photo3.jpg" data-alt="Wedding photo 03"><span class="gallery-frame"><span class="photo-placeholder">PHOTO 03</span></span><span class="gallery-caption">03</span></button>
-        <button class="gallery-item" data-src="./assets/photo4.jpg" data-alt="Wedding photo 04"><span class="gallery-frame"><span class="photo-placeholder">PHOTO 04</span></span><span class="gallery-caption">04</span></button>
-        <button class="gallery-item" data-src="./assets/photo5.jpg" data-alt="Wedding photo 05"><span class="gallery-frame"><span class="photo-placeholder">PHOTO 05</span></span><span class="gallery-caption">05</span></button>
-        <button class="gallery-item" data-src="./assets/photo6.jpg" data-alt="Wedding photo 06"><span class="gallery-frame"><span class="photo-placeholder">PHOTO 06</span></span><span class="gallery-caption">06</span></button>
-        <button class="gallery-item" data-src="./assets/photo7.jpg" data-alt="Wedding photo 07"><span class="gallery-frame"><span class="photo-placeholder">PHOTO 07</span></span><span class="gallery-caption">07</span></button>
+        <button class="gallery-item" data-src="./photo2.jpg" data-alt="Wedding photo 02">
+          <span class="gallery-frame"><img class="gallery-image" src="./photo2.jpg" alt="Wedding photo 02"></span>
+          <span class="gallery-caption">02</span>
+        </button>
+        <button class="gallery-item" data-src="./photo3.jpg" data-alt="Wedding photo 03">
+          <span class="gallery-frame"><img class="gallery-image" src="./photo3.jpg" alt="Wedding photo 03"></span>
+          <span class="gallery-caption">03</span>
+        </button>
+        <button class="gallery-item" data-src="./photo4.jpg" data-alt="Wedding photo 04">
+          <span class="gallery-frame"><img class="gallery-image" src="./photo4.jpg" alt="Wedding photo 04"></span>
+          <span class="gallery-caption">04</span>
+        </button>
+        <button class="gallery-item" data-src="./photo5.jpg" data-alt="Wedding photo 05">
+          <span class="gallery-frame"><img class="gallery-image" src="./photo5.jpg" alt="Wedding photo 05"></span>
+          <span class="gallery-caption">05</span>
+        </button>
+        <button class="gallery-item" data-src="./photo6.jpg" data-alt="Wedding photo 06">
+          <span class="gallery-frame"><img class="gallery-image" src="./photo6.jpg" alt="Wedding photo 06"></span>
+          <span class="gallery-caption">06</span>
+        </button>
+        <button class="gallery-item" data-src="./photo7.jpg" data-alt="Wedding photo 07">
+          <span class="gallery-frame"><img class="gallery-image" src="./photo7.jpg" alt="Wedding photo 07"></span>
+          <span class="gallery-caption">07</span>
+        </button>
       </div>
     </div>
   </section>
@@ -642,30 +603,6 @@ a{color:inherit;text-decoration:none}
 <div class="toast" id="toast"></div>
 
 <script>
-const introOverlay = document.getElementById("introOverlay");
-let introOpened = false;
-
-function openIntro(){
-  if(introOpened) return;
-  introOpened = true;
-  const heroCard = document.querySelector(".hero-card");
-  if(heroCard) heroCard.classList.add("is-visible");
-  introOverlay.classList.add("is-open");
-  window.setTimeout(()=>{
-    introOverlay.classList.add("is-done");
-    document.body.classList.remove("intro-locked");
-    introOverlay.remove();
-  },1550);
-}
-
-introOverlay.addEventListener("click",openIntro);
-introOverlay.addEventListener("keydown",(e)=>{
-  if(e.key==="Enter" || e.key===" "){
-    e.preventDefault();
-    openIntro();
-  }
-});
-
 const ADDRESS = "카페 누뗀 서울특별시 서초구 청계산로 119";
 const modal = document.getElementById("galleryModal");
 const modalImage = document.getElementById("modalImage");
@@ -722,19 +659,7 @@ function openMap(type){
 
 document.querySelectorAll(".gallery-item").forEach(item=>{
   const src = item.dataset.src;
-  const frame = item.querySelector(".gallery-frame");
-  const placeholder = frame.querySelector(".photo-placeholder");
-  const img = new Image();
-  img.onload = ()=>{
-    frame.innerHTML = '<img class="gallery-image" src="'+src+'" alt="'+item.dataset.alt+'">';
-  };
-  img.onerror = ()=>{};
-  img.src = src;
   item.addEventListener("click",()=>{
-    if(!img.complete || !img.naturalWidth){
-      showToast("사진 파일을 준비 중입니다.");
-      return;
-    }
     modalImage.src = src;
     modalImage.alt = item.dataset.alt || "Wedding photo";
     modal.classList.add("open");
