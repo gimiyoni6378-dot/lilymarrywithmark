@@ -181,11 +181,20 @@ a{color:inherit;text-decoration:none}
   user-select:none;
   -webkit-user-select:none;
 }
+.gallery-track{
+  display:flex;
+  width:200%;
+  transition:transform .32s ease;
+  will-change:transform;
+}
+.gallery-page{
+  flex:0 0 50%;
+  width:50%;
+}
 .gallery-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:12px;
-  transition:transform .32s ease;
 }
 .gallery-item{
   border:0;
@@ -194,7 +203,6 @@ a{color:inherit;text-decoration:none}
   cursor:pointer;
   min-width:0;
 }
-.gallery-item.is-hidden{display:none}
 .gallery-dots{
   display:flex;
   justify-content:center;
@@ -216,50 +224,6 @@ a{color:inherit;text-decoration:none}
   background:var(--red);
   transform:scale(1.15);
 }
-.gallery-frame{
-  position:relative;
-  background:var(--white);
-  padding:6px 6px 10px;
-  box-shadow:0 7px 16px rgba(27,27,24,.10);
-}
-.gallery-frame::before{
-  content:"";
-  position:absolute;
-  top:-8px;
-  left:50%;
-  width:54px;
-  height:16px;
-  transform:translateX(-50%) rotate(-1.5deg);
-  background:rgba(231,231,224,.58);
-  border:1px solid rgba(255,255,255,.34);
-  box-shadow:0 2px 4px rgba(27,27,24,.05);
-  backdrop-filter:blur(1px);
-  -webkit-backdrop-filter:blur(1px);
-  pointer-events:none;
-}
-.gallery-item:nth-child(2) .gallery-frame::before{transform:translateX(-50%) rotate(2deg);width:50px}
-.gallery-item:nth-child(3) .gallery-frame::before{transform:translateX(-50%) rotate(-3deg);width:58px}
-.gallery-item:nth-child(4) .gallery-frame::before{transform:translateX(-50%) rotate(1deg);width:52px}
-.gallery-item:nth-child(5) .gallery-frame::before{transform:translateX(-50%) rotate(-2deg);width:56px}
-.gallery-item:nth-child(6) .gallery-frame::before{transform:translateX(-50%) rotate(2.5deg);width:50px}
-.gallery-item:nth-child(1) .gallery-frame{transform:rotate(-1.8deg)}
-.gallery-item:nth-child(2) .gallery-frame{transform:rotate(.8deg)}
-.gallery-item:nth-child(3) .gallery-frame{transform:rotate(1.7deg)}
-.gallery-item:nth-child(4) .gallery-frame{transform:rotate(-1deg)}
-.gallery-item:nth-child(5) .gallery-frame{transform:rotate(.9deg)}
-.gallery-item:nth-child(6) .gallery-frame{transform:rotate(-1.5deg)}
-.gallery-item:nth-child(7) .gallery-frame::before{transform:translateX(-50%) rotate(-1.5deg);width:54px}
-.gallery-item:nth-child(8) .gallery-frame::before{transform:translateX(-50%) rotate(2deg);width:50px}
-.gallery-item:nth-child(9) .gallery-frame::before{transform:translateX(-50%) rotate(-3deg);width:58px}
-.gallery-item:nth-child(10) .gallery-frame::before{transform:translateX(-50%) rotate(1deg);width:52px}
-.gallery-item:nth-child(11) .gallery-frame::before{transform:translateX(-50%) rotate(-2deg);width:56px}
-.gallery-item:nth-child(12) .gallery-frame::before{transform:translateX(-50%) rotate(2.5deg);width:50px}
-.gallery-item:nth-child(7) .gallery-frame{transform:rotate(-1.8deg)}
-.gallery-item:nth-child(8) .gallery-frame{transform:rotate(.8deg)}
-.gallery-item:nth-child(9) .gallery-frame{transform:rotate(1.7deg)}
-.gallery-item:nth-child(10) .gallery-frame{transform:rotate(-1deg)}
-.gallery-item:nth-child(11) .gallery-frame{transform:rotate(.9deg)}
-.gallery-item:nth-child(12) .gallery-frame{transform:rotate(-1.5deg)}
 .gallery-image{
   width:100%;
   aspect-ratio:1/1.18;
@@ -653,43 +617,51 @@ body.intro-open{overflow:hidden}
       <h2 class="script-title">Moments together</h2>
       <div class="subtle-divider"></div>
       <div class="gallery-slider" id="gallerySlider">
-        <div class="gallery-grid" id="galleryGrid">
-        <button class="gallery-item" data-src="./new%20photo/photo2.jpg" data-alt="Wedding photo 02">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo2.jpg" alt="Wedding photo 02"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo3.jpg" data-alt="Wedding photo 03">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo3.jpg" alt="Wedding photo 03"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo4.jpg" data-alt="Wedding photo 04">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo4.jpg" alt="Wedding photo 04"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo5.jpg" data-alt="Wedding photo 05">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo5.jpg" alt="Wedding photo 05"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo7.jpg" data-alt="Wedding photo 07">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo7.jpg" alt="Wedding photo 07"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo8.jpg" data-alt="Wedding photo 08">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo8.jpg" alt="Wedding photo 08"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo9.jpg" data-alt="Wedding photo 09">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo9.jpg" alt="Wedding photo 09"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo10.jpg" data-alt="Wedding photo 10">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo10.jpg" alt="Wedding photo 10"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo11.jpg" data-alt="Wedding photo 11">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo11.jpg" alt="Wedding photo 11"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo12.jpg" data-alt="Wedding photo 12">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo12.jpg" alt="Wedding photo 12"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo13.jpg" data-alt="Wedding photo 13">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo13.jpg" alt="Wedding photo 13"></span>
-        </button>
-        <button class="gallery-item" data-src="./new%20photo/photo14.jpg" data-alt="Wedding photo 14">
-          <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo14.jpg" alt="Wedding photo 14"></span>
-        </button>
+        <div class="gallery-track" id="galleryTrack">
+          <div class="gallery-page">
+            <div class="gallery-grid">
+          <button class="gallery-item" data-src="./new%20photo/photo2.jpg" data-alt="Wedding photo 02">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo2.jpg" alt="Wedding photo 02"></span>
+          </button>
+          <button class="gallery-item" data-src="./new%20photo/photo3.jpg" data-alt="Wedding photo 03">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo3.jpg" alt="Wedding photo 03"></span>
+          </button>
+          <button class="gallery-item" data-src="./new%20photo/photo4.jpg" data-alt="Wedding photo 04">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo4.jpg" alt="Wedding photo 04"></span>
+          </button>
+          <button class="gallery-item" data-src="./new%20photo/photo5.jpg" data-alt="Wedding photo 05">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo5.jpg" alt="Wedding photo 05"></span>
+          </button>
+          <button class="gallery-item" data-src="./new%20photo/photo7.jpg" data-alt="Wedding photo 07">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo7.jpg" alt="Wedding photo 07"></span>
+          </button>
+          <button class="gallery-item" data-src="./new%20photo/photo8.jpg" data-alt="Wedding photo 08">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo8.jpg" alt="Wedding photo 08"></span>
+          </button>
+            </div>
+          </div>
+          <div class="gallery-page">
+            <div class="gallery-grid">
+          <button class="gallery-item" data-src="./new%20photo/photo9.jpg" data-alt="Wedding photo 09">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo9.jpg" alt="Wedding photo 09"></span>
+          </button>
+          <button class="gallery-item" data-src="./new%20photo/photo10.jpg" data-alt="Wedding photo 10">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo10.jpg" alt="Wedding photo 10"></span>
+          </button>
+          <button class="gallery-item" data-src="./new%20photo/photo11.jpg" data-alt="Wedding photo 11">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo11.jpg" alt="Wedding photo 11"></span>
+          </button>
+          <button class="gallery-item" data-src="./new%20photo/photo12.jpg" data-alt="Wedding photo 12">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo12.jpg" alt="Wedding photo 12"></span>
+          </button>
+          <button class="gallery-item" data-src="./new%20photo/photo13.jpg" data-alt="Wedding photo 13">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo13.jpg" alt="Wedding photo 13"></span>
+          </button>
+          <button class="gallery-item" data-src="./new%20photo/photo14.jpg" data-alt="Wedding photo 14">
+            <span class="gallery-frame"><img class="gallery-image" src="./new%20photo/photo14.jpg" alt="Wedding photo 14"></span>
+          </button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="gallery-dots" id="galleryDots" aria-label="Gallery pages">
@@ -886,6 +858,7 @@ function openMap(type){
 
 const galleryItems = Array.from(document.querySelectorAll(".gallery-item"));
 const gallerySlider = document.getElementById("gallerySlider");
+const galleryTrack = document.getElementById("galleryTrack");
 const galleryDots = Array.from(document.querySelectorAll(".gallery-dot"));
 let galleryIndex = 0;
 let galleryPage = 0;
@@ -893,19 +866,11 @@ let galleryTouchStartX = 0;
 let galleryTouchStartY = 0;
 let galleryTouchTracking = false;
 
-function showGalleryPage(page, animate=true){
+function showGalleryPage(page){
   galleryPage = Math.max(0, Math.min(1, page));
-  galleryItems.forEach((item,index)=>{
-    item.classList.toggle("is-hidden", Math.floor(index/6)!==galleryPage);
-  });
+  galleryTrack.style.transform = "translateX(" + (-galleryPage * 50) + "%)";
   galleryDots.forEach((dot,index)=>{
     dot.classList.toggle("is-active", index===galleryPage);
-  });
-  const grid = document.getElementById("galleryGrid");
-  if(grid) grid.style.transform = "translateX(0)";
-  if(!animate) gallerySlider?.classList.add("no-transition");
-  requestAnimationFrame(()=>{
-    if(!animate) gallerySlider?.classList.remove("no-transition");
   });
 }
 
@@ -913,21 +878,21 @@ galleryDots.forEach((dot,index)=>{
   dot.addEventListener("click",()=>showGalleryPage(index));
 });
 
-gallerySlider?.addEventListener("touchstart",(e)=>{
+gallerySlider.addEventListener("touchstart",(e)=>{
   if(!e.touches.length) return;
   galleryTouchStartX=e.touches[0].clientX;
   galleryTouchStartY=e.touches[0].clientY;
   galleryTouchTracking=true;
 },{passive:true});
 
-gallerySlider?.addEventListener("touchmove",(e)=>{
+gallerySlider.addEventListener("touchmove",(e)=>{
   if(!galleryTouchTracking || !e.touches.length) return;
   const dx=e.touches[0].clientX-galleryTouchStartX;
   const dy=e.touches[0].clientY-galleryTouchStartY;
   if(Math.abs(dx)>Math.abs(dy) && Math.abs(dx)>10) e.preventDefault();
 },{passive:false});
 
-gallerySlider?.addEventListener("touchend",(e)=>{
+gallerySlider.addEventListener("touchend",(e)=>{
   if(!galleryTouchTracking) return;
   galleryTouchTracking=false;
   const touch=e.changedTouches[0];
@@ -938,11 +903,6 @@ gallerySlider?.addEventListener("touchend",(e)=>{
   if(dx<0 && galleryPage===0) showGalleryPage(1);
   if(dx>0 && galleryPage===1) showGalleryPage(0);
 });
-
-showGalleryPage(0,false);
-let touchStartX = 0;
-let touchStartY = 0;
-let touchTracking = false;
 
 function showGalleryImage(index){
   if(!galleryItems.length) return;
@@ -960,21 +920,6 @@ galleryItems.forEach((item,index)=>{
     document.body.style.overflow="hidden";
   });
 });
-
-function closeModal(){
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden","true");
-  modalImage.removeAttribute("src");
-  document.body.style.overflow="";
-}
-
-function showPreviousGalleryImage(){
-  showGalleryImage(galleryIndex-1);
-}
-
-function showNextGalleryImage(){
-  showGalleryImage(galleryIndex+1);
-}
 
 modalClose.addEventListener("click",closeModal);
 modal.addEventListener("click",(e)=>{
