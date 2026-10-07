@@ -790,7 +790,13 @@ function closeIntro(){
   introModal.setAttribute("aria-hidden","true");
   window.setTimeout(()=>{
     introModal.classList.remove("open","closing");
+    introModal.style.display="none";
     document.body.classList.remove("intro-open");
+    const firstViewportHeight=window.innerHeight || document.documentElement.clientHeight;
+    document.querySelectorAll(".reveal").forEach(el=>{
+      const rect=el.getBoundingClientRect();
+      if(rect.top < firstViewportHeight * .92) el.classList.add("is-visible");
+    });
   },680);
 }
 
