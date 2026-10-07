@@ -927,6 +927,20 @@ function showGalleryImage(index){
   modalImage.alt = item.dataset.alt || "Wedding photo";
 }
 
+function showNextGalleryImage(){
+  showGalleryImage(galleryIndex + 1);
+}
+
+function showPreviousGalleryImage(){
+  showGalleryImage(galleryIndex - 1);
+}
+
+function closeModal(){
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+}
+
 galleryItems.forEach((item,index)=>{
   item.addEventListener("click",()=>{
     showGalleryImage(index);
