@@ -402,8 +402,8 @@ a{color:inherit;text-decoration:none}
   color:var(--ink);
 }
 .reveal{
-  opacity:0;
-  transform:translateY(22px);
+  opacity:1;
+  transform:translateY(0);
   transition:opacity .72s ease,transform .72s ease;
 }
 .reveal.is-visible{opacity:1;transform:translateY(0)}
@@ -987,7 +987,10 @@ const revealObserver = new IntersectionObserver((entries)=>{
     if(entry.isIntersecting) entry.target.classList.add("is-visible");
   });
 },{threshold:.12,rootMargin:"0px 0px -40px 0px"});
-document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
+document.querySelectorAll(".reveal").forEach(el=>{
+  el.classList.add("is-visible");
+  revealObserver.observe(el);
+});
 
 document.querySelectorAll(".family-flower").forEach(img=>{
   img.addEventListener("error",()=>img.style.display="none");
