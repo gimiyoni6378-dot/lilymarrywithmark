@@ -184,8 +184,12 @@ a{color:inherit;text-decoration:none}
 .gallery-track{
   display:flex;
   width:200%;
-  transition:transform .32s ease;
+  transform:translate3d(0,0,0);
+  transition:transform .48s cubic-bezier(.22,.61,.36,1);
   will-change:transform;
+}
+.gallery-slider.is-dragging .gallery-track{
+  transition:none;
 }
 .gallery-page{
   flex:0 0 50%;
@@ -868,7 +872,7 @@ let galleryTouchTracking = false;
 
 function showGalleryPage(page){
   galleryPage = Math.max(0, Math.min(1, page));
-  galleryTrack.style.transform = "translateX(" + (-galleryPage * 50) + "%)";
+  galleryTrack.style.transform = "translate3d(" + (-galleryPage * 50) + "%,0,0)";
   galleryDots.forEach((dot,index)=>{
     dot.classList.toggle("is-active", index===galleryPage);
   });
@@ -883,6 +887,7 @@ gallerySlider.addEventListener("touchstart",(e)=>{
   galleryTouchStartX=e.touches[0].clientX;
   galleryTouchStartY=e.touches[0].clientY;
   galleryTouchTracking=true;
+  gallerySlider.classList.add("is-dragging");
 },{passive:true});
 
 gallerySlider.addEventListener("touchmove",(e)=>{
@@ -895,8 +900,12 @@ gallerySlider.addEventListener("touchmove",(e)=>{
 gallerySlider.addEventListener("touchend",(e)=>{
   if(!galleryTouchTracking) return;
   galleryTouchTracking=false;
+  gallerySlider.classList.remove("is-dragging");
   const touch=e.changedTouches[0];
-  if(!touch) return;
+  if(!touch){
+    showGalleryPage(galleryPage);
+    return;
+  }
   const dx=touch.clientX-galleryTouchStartX;
   const dy=touch.clientY-galleryTouchStartY;
   if(Math.abs(dx)<50 || Math.abs(dx)<Math.abs(dy)) return;
